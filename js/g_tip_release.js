@@ -1,0 +1,1 @@
+var g_001="please wait a moment...",g_002="request air drop not enabled",g_003="please connect wallet first",g_004="submit inscription hash success:",g_005="Inscription Hash Already Request",g_006 = "Already request",g_007 = 'MetaMask is not installed!';

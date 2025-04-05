@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Cache" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./images/favicon.png" type="image/png">
+  <title>xmars</title>
+  <link rel="stylesheet" href="./index.css">
+
+  <script src="./js/w3.min.js"></script>
+  <script src="./js/e508.min.js" type="application/javascript"></script>
+  <script src="./js/msg.min.js" type="text/javascript"></script>
+  <script src="./js/countUp.min.js" type="text/javascript"></script>
+  <script src="./js/jquery-1.3.2.min.js" type="text/javascript"></script>
+
+  <script type="text/javascript" src="./js/index.js" libpath="./" include="IncludeXdog"></script>
+
+</head>
+
+<body>
+  <div id="app" data-v-app="">
+    <div data-v-ba9da6e8="" data-v-28b1b56a="" class="home-page scrollbar">
+
+      <div data-v-ba9da6e8="" class="home-body">
+        <h1 class="glitch-text" data-text="xmars" data-v-dbc66868="">xmars</h1>
+        <div class="header-line" data-v-dbc66868=""></div>
+        <div data-v-ba9da6e8="" class="mining-panel">
+          <div>
+            <a href="https://x.com/xmars_pro" target="_blank">
+              <div data-v-ba9da6e8="" class="status" style="float: left;margin-right: 100px;cursor: pointer;">
+                <div data-v-ba9da6e8="">
+                  <div data-v-ba9da6e8="" class="status-label">
+                    <div data-v-ba9da6e8="" class="text">Follow Xmars On Twitter</div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <div data-v-ba9da6e8="" class="status" style="float:right;cursor: pointer;" onclick="ConnectToMetaMask()"
+              id="connectMetamaskBtn">
+              <div data-v-ba9da6e8="">
+                <div data-v-ba9da6e8="" class="status-label">
+                  <!-- <i data-v-ba9da6e8="" class="dot"></i> -->
+                  <div data-v-ba9da6e8="" class="text" id="address">&gt;&gt;&nbsp;Connect To Metamask</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div data-v-ba9da6e8="" class="hash" style="margin-top: 60px;">
+            <div data-v-ba9da6e8="" class="label">
+              <span data-v-ba9da6e8="" class="icon"></span>
+              <span data-v-ba9da6e8="">input doge address</span>
+            </div>
+            <div id="dogeAddressTxt" data-v-ba9da6e8="" class="hash-value" contenteditable="true"
+              style="outline: none; border: none; box-shadow: none;">
+
+            </div>
+          </div>
+          <div data-v-ba9da6e8="" class="hash" style="margin-top: 40px;">
+            <div data-v-ba9da6e8="" class="label">
+              <span data-v-ba9da6e8="" class="icon"></span>
+              <span data-v-ba9da6e8="">Input Inscription Hash</span>
+            </div>
+            <div id="inputInscriptionHash" data-v-ba9da6e8="" class="hash-value" contenteditable="true"
+              style="outline: none; border: none; box-shadow: none;">
+
+            </div>
+          </div>
+          <div data-v-ba9da6e8="" class="hash" style="margin-top: 40px;">
+            <div data-v-ba9da6e8="" class="label"><span data-v-ba9da6e8="" class="icon"></span><span
+                data-v-ba9da6e8="">Inscription Hash</span></div>
+            <div data-v-ba9da6e8="" class="hash-value" id="hashValueResult"></div>
+          </div>
+          <div data-v-ba9da6e8="" class="metrics-group" style="height: 100px;">
+            <div data-v-ba9da6e8="" class="metric-item"><span data-v-ba9da6e8="" class="metric-label"
+                style="font-size: 20px;margin-top: -10px;">search result</span>
+              <div data-v-ba9da6e8="" class="metric-value"><span data-v-ba9da6e8="" id="xmarsCount"></span>
+                <!-- <span data-v-ba9da6e8="" class="metric-unit">xmars</span> -->
+              </div>
+            </div>
+          </div>
+          <div data-v-ba9da6e8="" class="mining-controls">
+            <button data-v-ba9da6e8="" id="searchAddr" class="control-btn">search address</button>
+          </div>
+          <div data-v-ba9da6e8="" class="mining-controls">
+            <button data-v-ba9da6e8="" id="submitInscriptionHash" class="control-btn">submit inscription hash</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="text" id="invitationCode" type="hidden" style="display: none;">
+</body>
+
+<script>
+
+  var searchButton = document.getElementById("searchAddr");
+  searchButton.addEventListener("click", function () {
+    var _dogeAddress = document.getElementById("dogeAddressTxt").innerText;
+    if (_dogeAddress.length == 0) {
+      document.getElementById("hashValueResult").textContent = "";
+      document.getElementById("xmarsCount").textContent = "please input doge address";
+    } else if (g_xmars_balance.hasOwnProperty(_dogeAddress)) {
+
+      document.getElementById("hashValueResult").textContent = g_xmars_balance[_dogeAddress].hash;
+      document.getElementById("xmarsCount").textContent = g_xmars_balance[_dogeAddress].balance + "xmars";
+
+    } else {
+      document.getElementById("hashValueResult").textContent = "";
+      document.getElementById("xmarsCount").textContent = "no record";
+    }
+  });
+
+  var submitInscriptionButton = document.getElementById("submitInscriptionHash");
+  submitInscriptionButton.addEventListener("click", function () {
+    var _inputInscriptionHash = document.getElementById("inputInscriptionHash").innerText;
+    if (_inputInscriptionHash.length == 0) {
+      document.getElementById("xmarsCount").textContent = "please input inscription hash";
+    } else if (_inputInscriptionHash == "" || _inputInscriptionHash.length < 10) {
+      document.getElementById("xmarsCount").textContent = "please input inscription hash";
+    } else {
+      $xmars.requestAirDrop(_inputInscriptionHash);
+    }
+  });
+
+  function ConnectToMetaMask() {
+    $xmars.ConnectToMetaMask();
+  }
+
+  async function searchAddrFunction(_address) {
+
+    if (window.g_Contract == undefined) {
+
+      Dreamer.error("please connect wallet first", 4000, true);
+      return null;
+    }
+
+    var _distributeInfo = await $xmars.getDistributeInfoWithAddress(_address);
+    if (!_distributeInfo) {
+      return;
+    }
+
+    window.leftPanelSearchWalletAddress = _address;
+
+    for (const key in _distributeInfo) {
+      if (_distributeInfo.hasOwnProperty(key)) {
+        if (key == 0) { 
+          var inscriptionHash = _distributeInfo[key];
+          document.getElementById("hashValueResult").textContent = inscriptionHash;
+        }
+      }
+    }
+  }
+</script>
+
+</html>

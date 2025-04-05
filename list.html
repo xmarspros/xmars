@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="chrome-extension://nebnhfamliijlghikdgcigoebonmoibm/addToWindow.js"></script>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Cache" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./images/favicon.png" type="image/png">
+  <title>xmars</title>
+  <link rel="stylesheet" href="./list.css">
+
+  <script type="text/javascript" src="./js/index.js" libpath="./" include="IncludeXdog"></script>
+
+</head>
+
+<body>
+  <div id="app" data-v-app="">
+    <div data-v-ba9da6e8="" data-v-28b1b56a="" class="home-page scrollbar">
+
+      <div data-v-ba9da6e8="" class="home-body">
+
+        <h1 class="glitch-text" data-text="xmars" data-v-dbc66868="">xmars</h1>
+        <div class="header-line" data-v-dbc66868=""></div>
+
+        <div data-v-ba9da6e8="" class="mining-dashboard">
+          <div data-v-ba9da6e8="" class="dashboard-column">
+            <div data-v-ba9da6e8="" class="mining-history">
+              <div data-v-ba9da6e8="" class="history-header">
+                <h3 data-v-ba9da6e8="">Block Time Stamp: 1743771211</h3>
+              </div>
+              <div data-v-ba9da6e8="" class="history-content" style="height: 600px;">
+                <table data-v-ba9da6e8="" id="historyTable">
+                  <thead data-v-ba9da6e8="">
+                    <tr data-v-ba9da6e8="">
+                      <th data-v-ba9da6e8="">address</th>
+                      <th data-v-ba9da6e8="">balance</th>
+                      <th data-v-ba9da6e8="">inscription hash</th>
+                    </tr>
+                  </thead>
+                  <tbody data-v-ba9da6e8="" id="historyBody">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var tbody = document.getElementById("historyBody");
+    for (var key in g_xmars_balance) {
+      if (g_xmars_balance.hasOwnProperty(key)) {
+        var rowData = g_xmars_balance[key]; 
+        var tr = document.createElement("tr");
+        tr.setAttribute("data-v-ba9da6e8", "");
+        var tdDate = document.createElement("td");
+        tdDate.setAttribute("data-v-ba9da6e8", "");
+        tdDate.textContent = key;
+        tr.appendChild(tdDate);
+        var tdAddress = document.createElement("td");
+        tdAddress.setAttribute("data-v-ba9da6e8", "");
+        tdAddress.textContent = rowData.balance;
+        tr.appendChild(tdAddress);
+        var tdAmount = document.createElement("td");
+        tdAmount.setAttribute("data-v-ba9da6e8", "");
+        tdAmount.textContent = rowData.hash;
+        tr.appendChild(tdAmount);
+        tbody.appendChild(tr);
+      }
+    }
+  </script>
+</body>
+</html>
